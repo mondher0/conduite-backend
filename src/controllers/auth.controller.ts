@@ -19,7 +19,6 @@ export const register = async (req: Request, res: Response) => {
     user: {
       name,
       email,
-      message: "User registered successfully",
     },
   });
 };
