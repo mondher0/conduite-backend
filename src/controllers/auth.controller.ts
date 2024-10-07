@@ -31,7 +31,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   }
   res.json({
     status: StatusCodes.OK,
-    message: "Logged in successfullsdsfsy",
+    message: "Logged in successfully",
     email,
   });
 };
