@@ -1,11 +1,9 @@
 import { Request, Response } from "express";
 import BadRequest from "../errors/bad-request.error";
-
 import { StatusCodes } from "http-status-codes";
-import { User } from "../entities/User.entity";
-import { AppDataSource } from "../db/data-source";
+import { AuthService } from "../services/auth.service";
 
-// Register will updated later
+// Register a new user i will updated later
 export const register = async (req: Request, res: Response) => {
   const {
     name,
@@ -17,28 +15,21 @@ export const register = async (req: Request, res: Response) => {
     throw new BadRequest("Please provide name, email, and password");
   }
 
-  // Create a new user instance
-  const user = new User();
-  user.name = name;
-  user.email = email;
-  user.password = password; // i will hash this password later
-
-  // Save the user to the database
-  const userRepository = AppDataSource.getRepository(User);
-  await userRepository.save(user);
+  // Call the registerUser service to handle the registration logic
+  const user = await AuthService.registerUser({ name, email, password });
 
   // Send the response
-  res.status(StatusCodes.CREATED).json({
+  res.json({
     status: StatusCodes.CREATED,
     message: "User registered successfully",
     user: {
-      name,
-      email,
+      name: user.name,
+      email: user.email,
     },
   });
 };
 
-// Login
+// // Login
 export const login = async (req: Request, res: Response): Promise<void> => {
   const { email, password }: { email: string; password: string } = req.body;
   if (!email || !password) {
