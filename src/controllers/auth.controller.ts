@@ -32,12 +32,18 @@ export const register = async (req: Request, res: Response) => {
 // // Login
 export const login = async (req: Request, res: Response): Promise<void> => {
   const { email, password }: { email: string; password: string } = req.body;
+  
   if (!email || !password) {
     throw new BadRequest("Please provide email or password or both");
   }
+  const user = await AuthService.login({ email, password });
   res.json({
     status: StatusCodes.OK,
     message: "Logged in successfully",
-    email,
+    user: {
+      name: user.name,
+      email: user.email,
+    },
+    token: user.token,
   });
 };
