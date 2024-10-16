@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "commonjs",
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "esModuleInterop": true,
+    "target": "es2016",                    // You can upgrade to ES2020 or ES6 if needed
+    "module": "commonjs",                  // CommonJS for Node.js compatibility
+    "rootDir": "./src",                    // Source directory
+    "outDir": "./dist",                    // Output directory for compiled JS
+    "esModuleInterop": true,               // Ensures compatibility with ES modules
     "forceConsistentCasingInFileNames": true,  
-    "strict": true,
-    "skipLibCheck": true
-  }
+    "strict": true,                        // Enables strict type-checking options
+    "skipLibCheck": true,                  // Skip type checking of declaration files
+    "experimentalDecorators": true,        // Enables decorators
+    "emitDecoratorMetadata": true,         // Allows metadata reflection for decorators
+    "strictPropertyInitialization": false  // Disables strict property initialization (needed for TypeORM entities)
+  },
+  "include": ["src/**/*.ts"],              // Make sure to include the source folder
+  "exclude": ["node_modules"]              // Exclude node_modules
 }
