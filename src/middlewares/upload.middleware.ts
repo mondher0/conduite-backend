@@ -59,6 +59,5 @@ const upload = multer({
       cb(new Error("Error: Images Only!"));
     }
   },
-}).single("image");
-
+});
 export default upload;
