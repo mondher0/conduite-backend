@@ -1,0 +1,39 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_TYPE=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=mondher
+      - DB_DATABASE=conduite-db
+      - DB_SYNCHRONIZE=true
+      - DB_LOGGING=true
+    depends_on:
+      - db
+    networks:
+      - my-network
+
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mondher
+      - POSTGRES_DB=conduite-db
+    ports:
+      - "8000:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+
+volumes:
+  pgdata:
+
+networks:
+  my-network:

@@ -15,4 +15,4 @@ export const AppDataSource = new DataSource({
   logging: process.env.DB_LOGGING === "true",
   entities: [User],
   migrations: ["src/migration/**/*.ts"],
-});
+});;
