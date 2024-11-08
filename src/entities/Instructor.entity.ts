@@ -1,7 +1,7 @@
 import { Entity, Column, OneToMany, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
 import { User } from "./User.entity";
 import { INSTRUCTOR_ENTITY } from "../common/constants";
-import { Rating } from "./rating.entity";
+import { Rating } from "./Rating.entity";
 import { GenericEntity } from "../common/entities/Generic.entity";
 
 @Entity(INSTRUCTOR_ENTITY)
