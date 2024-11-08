@@ -8,14 +8,21 @@ import {
 
 // Register a new user i will updated later
 export const register = async (req: Request, res: Response): Promise<void> => {
-  const { name, email, password }: RegisterRequestDto = req.body;
+  const { firstName, lastName, role, email, password }: RegisterRequestDto =
+    req.body;
 
-  if (!name || !email || !password) {
+  if (!firstName || !lastName || !role || !email || !password) {
     throw new BadRequest("Please provide name, email, and password");
   }
 
   // Call the registerUser service to handle the registration logic
-  const response = await AuthService.registerUser({ name, email, password });
+  const response = await AuthService.registerUser({
+    firstName,
+    lastName,
+    email,
+    role,
+    password,
+  });
 
   // Send the response
   res.json(response);

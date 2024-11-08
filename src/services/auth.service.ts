@@ -10,14 +10,20 @@ import {
   RegisterResultDto,
   ServiceResponse,
 } from "../common/interfaces/index.interface";
+import { UserRoles } from "../common/enums";
+import { Instructor, Learner } from "../entities";
 
 export class AuthService {
   // Define the repository once
   private static userRepository = AppDataSource.getRepository(User);
+  private static instructorRepository = AppDataSource.getRepository(Instructor);
+  private static learnerRepository = AppDataSource.getRepository(Learner);
 
   static async registerUser({
-    name,
+    firstName,
+    lastName,
     email,
+    role,
     password,
   }: RegisterRequestDto): Promise<ServiceResponse<RegisterResultDto>> {
     // Use the repository without repeating
@@ -30,11 +36,23 @@ export class AuthService {
     const hashedPassword = await hashPassword(password);
 
     const user = new User();
-    user.name = name;
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.role = role;
     user.email = email;
     user.password = hashedPassword;
 
     await this.userRepository.save(user);
+
+    if (role === UserRoles.INSTRUCTOR) {
+      const instructor = new Instructor();
+      instructor.user = user;
+      await this.instructorRepository.save(instructor);
+    } else {
+      const learner = new Learner();
+      learner.user = user;
+      await this.learnerRepository.save(learner);
+    }
 
     const response: ServiceResponse<RegisterResultDto> = {
       success: true,
@@ -42,8 +60,10 @@ export class AuthService {
       data: {
         user: {
           id: user.id,
-          name: user.name,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
+          role: user.role,
         },
       },
     };
@@ -75,8 +95,10 @@ export class AuthService {
         token,
         user: {
           id: user.id,
-          name: user.name,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
+          role: user.role,
         },
       },
     };

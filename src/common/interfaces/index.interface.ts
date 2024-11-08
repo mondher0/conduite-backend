@@ -1,8 +1,12 @@
+import { UserRoles } from "../enums";
+
 export interface User {
   id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password?: string;
+  role : UserRoles;
 }
 
 export interface ServiceResponse<T> {
@@ -22,9 +26,11 @@ export interface LoginResultDto {
 }
 
 export interface RegisterRequestDto {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
+  role: UserRoles;
 }
 
 export interface RegisterResultDto {
