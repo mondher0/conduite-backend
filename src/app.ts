@@ -7,6 +7,7 @@ dotenv.config();
 import notFoundMiddleware from "./middlewares/not-found.middleware";
 import errorHandlerMiddleware from "./middlewares/error-handler.middleware";
 import authRouter from "./routes/auth.route";
+import contactUsRouter from "./routes/contact-us.route";
 import { initializeDatabase } from "./db/connect";
 
 // Create an Express application
@@ -28,6 +29,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/contact-us", contactUsRouter);
 
 // error handling middleware
 app.use(notFoundMiddleware);

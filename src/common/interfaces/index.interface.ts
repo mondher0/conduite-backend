@@ -6,13 +6,13 @@ export interface User {
   lastName: string;
   email: string;
   password?: string;
-  role : UserRoles;
+  role: UserRoles;
 }
 
-export interface ServiceResponse<T> {
+export interface ServiceResponse<T = void> {
   success: boolean;
   message: string;
-  data: T;
+  data?: T;
 }
 
 export interface LoginRequestDto {
@@ -35,4 +35,15 @@ export interface RegisterRequestDto {
 
 export interface RegisterResultDto {
   user: User;
+}
+
+export interface ContactUsRequestDto {
+  email: string;
+  message: string;
+}
+
+export interface ContactUs {
+  id: string;
+  email: string;
+  message: string;
 }
