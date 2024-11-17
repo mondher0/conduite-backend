@@ -5,7 +5,7 @@ import {
   JoinColumn,
 } from "typeorm";
 import { Instructor } from "./Instructor.entity";
-import { Learner } from "./learner.entity";
+import { Learner } from "./Learner.entity";
 import { RATING_ENTITY } from "../common/constants";
 import { GenericEntity } from "../common/entities/Generic.entity";
 
