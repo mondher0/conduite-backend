@@ -1,4 +1,4 @@
-import { Entity, Column, OneToMany, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
+import { Entity, Column, OneToMany, OneToOne, JoinColumn } from "typeorm";
 import { User } from "./User.entity";
 import { INSTRUCTOR_ENTITY } from "../common/constants";
 import { Rating } from "./Rating.entity";
