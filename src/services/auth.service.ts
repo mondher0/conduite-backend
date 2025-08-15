@@ -90,7 +90,7 @@ export class AuthService {
 
     const response: ServiceResponse<LoginResultDto> = {
       success: true,
-      message: "Login successful",
+      message: "user logged in successfully",
       data: {
         token,
         user: {
